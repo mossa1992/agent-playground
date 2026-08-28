@@ -5,17 +5,10 @@ import usersRouter from "./routes/users";
 const app = express();
 const port = process.env.PORT || 4000;
 
-// JSON body size limit set to 1mb to prevent overly large payloads.
-app.use(express.json({ limit: "1mb" }));
+app.use(express.json());
 
 app.get("/health", (_req, res) => {
-  res.json({
-    status: "ok",
-    data: {
-      service: "taskflow-api",
-      uptime: process.uptime(),
-    },
-  });
+  res.json({ status: "ok", service: "taskflow-api" });
 });
 
 app.use("/users", usersRouter);
